@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="com.nck_QuanLyDiemSinhVien_war_1.0-SNAPSHOTPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>com.example.model.CotDiemThem</class>
+    <class>com.example.model.CotDiem</class>
+    <class>com.example.model.DangKyMonHoc</class>
+    <class>com.example.model.Forums</class>
+    <class>com.example.model.LopHoc</class>
+    <class>com.example.model.MonHoc</class>
+    <class>com.example.model.NguoiDung</class>
+    <class>com.example.model.TinNhanForum</class>
+    <class>com.nck.pojo.Dangkymonhoc</class>
+    <class>com.nck.pojo.DanhMucMonHoc</class>
+    <class>com.nck.pojo.Forums</class>
+    <class>com.nck.pojo.Lophoc</class>
+    <class>com.nck.pojo.CotDiemThem</class>
+    <class>com.nck.pojo.Nguoidung</class>
+    <class>com.nck.pojo.ScoreSv</class>
+    <class>com.nck.pojo.Monhoc</class>
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/diemsinhviendb?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
+      <property name="javax.persistence.jdbc.user" value="root"/>
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+      <property name="javax.persistence.jdbc.password" value="Admin@123"/>
+    </properties>
+  </persistence-unit>
+</persistence>
