@@ -6,11 +6,13 @@ D:\4\BTLPTW\QuanLyDiemSinhVien\src\main\java\com\nck\pojo\Forums.java
 D:\4\BTLPTW\QuanLyDiemSinhVien\src\main\java\com\nck\repositories\impl\DanhMucRepositoryImpl.java
 D:\4\BTLPTW\QuanLyDiemSinhVien\src\main\java\com\nck\pojo\Dangkymonhoc.java
 D:\4\BTLPTW\QuanLyDiemSinhVien\src\main\java\com\nck\services\impl\DanhMucServiceImpl.java
+D:\4\BTLPTW\QuanLyDiemSinhVien\src\main\java\com\nck\configs\TilesConfig.java
 D:\4\BTLPTW\QuanLyDiemSinhVien\src\main\java\com\nck\controllers\HomeControllers.java
 D:\4\BTLPTW\QuanLyDiemSinhVien\src\main\java\com\nck\pojo\Monhoc.java
 D:\4\BTLPTW\QuanLyDiemSinhVien\src\main\java\com\nck\pojo\ScoreSv.java
 D:\4\BTLPTW\QuanLyDiemSinhVien\src\main\java\com\nck\configs\HibernateConfigs.java
 D:\4\BTLPTW\QuanLyDiemSinhVien\src\main\java\com\nck\pojo\DanhMucMonHoc.java
+D:\4\BTLPTW\QuanLyDiemSinhVien\src\main\java\com\nck\controllers\MonhocController.java
 D:\4\BTLPTW\QuanLyDiemSinhVien\src\main\java\com\nck\configs\DispatcherServletInit.java
 D:\4\BTLPTW\QuanLyDiemSinhVien\src\main\java\com\nck\pojo\CotDiemThem.java
 D:\4\BTLPTW\QuanLyDiemSinhVien\src\main\java\com\nck\pojo\Nguoidung.java

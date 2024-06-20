@@ -74,14 +74,14 @@ public class MonhocRepositoryImpl implements MonhocRepository {
 
         Query query = s.createQuery(q);
 
-        //phân trang, s? c?n cho vi?c phân trang svien
-        String p = params.get("page");
-        if (p != null && !p.isEmpty()) {
-            int pageSize = Integer.parseInt(env.getProperty("monhocs.pageSize").toString());
-            int start = (Integer.parseInt(p) - 1) * pageSize;
-            query.setFirstResult(start);
-            query.setMaxResults(pageSize);
-        }
+//        //phân trang, s? c?n cho vi?c phân trang svien
+//        String p = params.get("page");
+//        if (p != null && !p.isEmpty()) {
+//            int pageSize = Integer.parseInt(env.getProperty("monhocs.pageSize").toString());
+//            int start = (Integer.parseInt(p) - 1) * pageSize;
+//            query.setFirstResult(start);
+//            query.setMaxResults(pageSize);
+//        }
 
         List<Monhoc> monhocs = query.getResultList();
         return monhocs;

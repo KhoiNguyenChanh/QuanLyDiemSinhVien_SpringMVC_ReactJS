@@ -36,17 +36,18 @@ public class WebAppContextConfig implements WebMvcConfigurer{
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
         configurer.enable();
     }
+    //sau khi t?o tiles, chuongr trình tu di tim tiles, ko có dùng resolver trong day nua
 //    resolver lay du lieu trong pages, phai bao bean neu ko no se ko biet
-    @Bean
-    public InternalResourceViewResolver internalResourceViewResolver(){
-        InternalResourceViewResolver r = new InternalResourceViewResolver();
-        //2 nv: chi dinh "vi tri thu muc" va chi dinh "loai"
-        r.setViewClass(JstlView.class);
-        //vi tri thu muc (tien to)
-        r.setPrefix("/WEB-INF/pages/");
-        //vi tri duoi? (hau to)
-        r.setSuffix(".jsp");
-        return r;
-    }
+//    @Bean
+//    public InternalResourceViewResolver internalResourceViewResolver(){
+//        InternalResourceViewResolver r = new InternalResourceViewResolver();
+//        //2 nv: chi dinh "vi tri thu muc" va chi dinh "loai"
+//        r.setViewClass(JstlView.class);
+//        //vi tri thu muc (tien to)
+//        r.setPrefix("/WEB-INF/pages/");
+//        //vi tri duoi? (hau to)
+//        r.setSuffix(".jsp");
+//        return r;
+//    }
     
 }
