@@ -34,4 +34,12 @@ public class NguoidungRepositoryImpl implements NguoidungRepository {
         return q.getResultList();
     }
 
+    @Override
+    public List<Nguoidung> getUser() {
+        Session s = this.factory.getObject().getCurrentSession();
+        Query q = s.createNamedQuery("Nguoidung.findAll");
+    
+        return q.getResultList();     
+    }
+
 }

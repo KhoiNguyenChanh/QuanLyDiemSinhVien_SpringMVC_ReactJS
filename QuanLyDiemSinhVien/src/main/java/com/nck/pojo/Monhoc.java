@@ -46,8 +46,8 @@ public class Monhoc implements Serializable {
     @Column(name = "id")
     private Long id;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 255)
+    @NotNull(message = "{Monhoc.ten.nullErr}")
+    @Size(min = 1, max = 255, message ="{Monhoc.ten.minMaxErr}")
     @Column(name = "ten")
     private String ten;
     @Lob

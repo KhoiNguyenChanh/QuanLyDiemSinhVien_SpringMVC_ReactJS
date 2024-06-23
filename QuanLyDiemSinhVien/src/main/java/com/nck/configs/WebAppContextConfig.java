@@ -4,12 +4,23 @@
  */
 package com.nck.configs;
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
+import com.nck.formatters.DanhmucFormatter;
+import com.nck.formatters.NguoidungFormatter;
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.validation.Validator;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
@@ -30,13 +41,68 @@ import org.springframework.web.servlet.view.JstlView;
     "com.nck.services"
 
 })
-public class WebAppContextConfig implements WebMvcConfigurer{
+public class WebAppContextConfig implements WebMvcConfigurer {
 
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
         configurer.enable();
     }
-    //sau khi t?o tiles, chuongr trình tu di tim tiles, ko có dùng resolver trong day nua
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/js/**").addResourceLocations("/resources/js/");
+    }
+
+    @Bean
+    public MessageSource messageSource() {
+        ResourceBundleMessageSource m = new ResourceBundleMessageSource();
+        m.setBasename("messages");
+        return m;
+    }
+
+    @Bean(name = "validator")
+    public LocalValidatorFactoryBean validator() {
+        LocalValidatorFactoryBean bean
+                = new LocalValidatorFactoryBean();
+        bean.setValidationMessageSource(messageSource());
+        return bean;
+    }
+
+    @Override
+    public Validator getValidator() {
+        return validator();
+    }
+
+    @Bean
+    public CommonsMultipartResolver multipartResolver() {
+        CommonsMultipartResolver resolver
+                = new CommonsMultipartResolver();
+        resolver.setDefaultEncoding("UTF-8");
+        return resolver;
+    }
+
+    @Override
+    public void addFormatters(FormatterRegistry registry) {
+        registry.addFormatter(new DanhmucFormatter());
+        registry.addFormatter(new NguoidungFormatter());
+    }
+
+    @Bean
+    public Cloudinary cloudinary() {
+        Cloudinary cloudinary
+                = new Cloudinary(ObjectUtils.asMap(
+                        "cloud_name", "dbqaequqv",
+                        "api_key", "741317942552615",
+                        "api_secret", "L05czfd2tdEhRvbUy29A1vF8BZ4",
+                        "secure", true));
+        return cloudinary;
+    }
+}
+//    @Override
+//    public void addFormatters(FormatterRegistry registry) {
+//        registry.addFormatter(new CategoryFormatter());
+//    }
+//sau khi t?o tiles, chuongr trình tu di tim tiles, ko có dùng resolver trong day nua
 //    resolver lay du lieu trong pages, phai bao bean neu ko no se ko biet
 //    @Bean
 //    public InternalResourceViewResolver internalResourceViewResolver(){
@@ -49,5 +115,3 @@ public class WebAppContextConfig implements WebMvcConfigurer{
 //        r.setSuffix(".jsp");
 //        return r;
 //    }
-    
-}

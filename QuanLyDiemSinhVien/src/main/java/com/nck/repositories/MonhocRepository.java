@@ -15,5 +15,8 @@ import java.util.Map;
 public interface MonhocRepository {
     List<Monhoc> getMonhoc(Map<String, String> params);
     void addOrUpdate (Monhoc m);
+    Monhoc getMonhocById(long id);
+    //xóa nôi bô ko khoa ngoai
+    void deleteMonhoc(long id);
 //   List<Monhoc> getMonhoc();
 }

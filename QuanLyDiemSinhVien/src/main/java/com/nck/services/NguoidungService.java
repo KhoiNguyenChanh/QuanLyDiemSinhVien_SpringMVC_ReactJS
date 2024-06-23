@@ -12,5 +12,9 @@ import java.util.List;
  * @author chanh
  */
 public interface NguoidungService {
-    List<Nguoidung> getNguoidung();
+
+    List<Nguoidung> getGiangVien();
+
+    List<Nguoidung> getUser();
+
 }

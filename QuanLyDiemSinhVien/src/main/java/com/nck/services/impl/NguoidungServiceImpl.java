@@ -16,12 +16,18 @@ import org.springframework.stereotype.Service;
  * @author chanh
  */
 @Service
-public class NguoidungServiceImpl implements NguoidungService{
+public class NguoidungServiceImpl implements NguoidungService {
+
     @Autowired
     private NguoidungRepository nguoidungRepository;
 
     @Override
-    public List<Nguoidung> getNguoidung() {
+    public List<Nguoidung> getGiangVien() {
         return nguoidungRepository.findByRole("giangvien");
+    }
+
+    @Override
+    public List<Nguoidung> getUser() {
+        return this.nguoidungRepository.getUser();
     }
 }

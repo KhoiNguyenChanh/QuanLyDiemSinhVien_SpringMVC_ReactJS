@@ -36,7 +36,8 @@ public class HomeControllers {
     @ModelAttribute
     public void commonAttr(Model model) {
         model.addAttribute("danhmuc", this.danhmucService.getDanhMuc());
-        model.addAttribute("giangvien", nguoidungService.getNguoidung());
+        model.addAttribute("giangvien", nguoidungService.getGiangVien());
+        model.addAttribute("user", nguoidungService.getUser());
 
     }
 

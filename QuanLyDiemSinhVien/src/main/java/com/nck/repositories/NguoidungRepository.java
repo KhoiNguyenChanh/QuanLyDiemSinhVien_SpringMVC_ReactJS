@@ -14,4 +14,5 @@ import java.util.List;
 //public interface NguoidungRepository extends JpaRepository<Nguoidung, Long> {
 public interface NguoidungRepository {
     List<Nguoidung> findByRole(String role);
+    List<Nguoidung> getUser();
 }

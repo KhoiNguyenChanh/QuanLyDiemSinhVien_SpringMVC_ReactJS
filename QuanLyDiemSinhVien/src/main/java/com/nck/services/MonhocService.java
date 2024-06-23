@@ -16,5 +16,8 @@ public interface MonhocService {
 //    List<Monhoc> getMonhoc();
     List<Monhoc> getMonhoc(Map<String, String> params);
     void addOrUpdate (Monhoc m);
+    Monhoc getMonhocById(long id);
+    //delete noi bo, chua delete khoa ngoai, de cho vui, sua sau
+    void deleteMonhoc(long id);
     
 }
