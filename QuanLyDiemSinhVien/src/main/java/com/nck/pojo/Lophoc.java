@@ -4,6 +4,7 @@
  */
 package com.nck.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.Basic;
@@ -40,6 +41,7 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Lophoc implements Serializable {
 
     @ManyToMany(mappedBy = "lophocSet")
+    @JsonIgnore
     private Set<Nguoidung> nguoidungSet;
 
     private static final long serialVersionUID = 1L;
@@ -56,15 +58,21 @@ public class Lophoc implements Serializable {
     @OneToMany(mappedBy = "lophoc")
     private Set<Forums> forumsSet;
     @JoinColumns({
-//        @JoinColumn(name = "mon_hoc_id", referencedColumnName = "id"),
-//        @JoinColumn(name = "mon_hoc_id", referencedColumnName = "id"),
-//        @JoinColumn(name = "mon_hoc_id", referencedColumnName = "id"),
+        //        @JoinColumn(name = "mon_hoc_id", referencedColumnName = "id"),
+        //        @JoinColumn(name = "mon_hoc_id", referencedColumnName = "id"),
+        //        @JoinColumn(name = "mon_hoc_id", referencedColumnName = "id"),
         @JoinColumn(name = "mon_hoc_id", referencedColumnName = "id")})
     @ManyToOne
+    @JsonIgnore
+
     private Monhoc monhoc;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "lopHocId")
+    @JsonIgnore
+
     private Set<Dangkymonhoc> dangkymonhocSet;
     @OneToMany(mappedBy = "lophoc")
+    @JsonIgnore
+
     private Set<ScoreSv> scoreSvSet;
 
     public Lophoc() {
@@ -163,5 +171,5 @@ public class Lophoc implements Serializable {
     public void setNguoidungSet(Set<Nguoidung> nguoidungSet) {
         this.nguoidungSet = nguoidungSet;
     }
-    
+
 }

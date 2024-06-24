@@ -6,6 +6,7 @@ package com.nck.repositories;
 
 import com.nck.pojo.Nguoidung;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -17,11 +18,15 @@ public interface NguoidungRepository {
     List<Nguoidung> findByRole(String role);
 
     Nguoidung getUserByUsername(String username);
+
     Nguoidung getUserById(long id);
+
     void addUser(Nguoidung user);
 
     void deleteUser(long id);
 
     List<Nguoidung> getUser();
+
+    List<Nguoidung> getUser(Map<String, String> params);
 
 }

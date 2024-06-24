@@ -4,13 +4,22 @@
  */
 package com.nck.controllers;
 
+import com.nck.dto.NguoidungDTO;
 import com.nck.pojo.Nguoidung;
 import com.nck.services.NguoidungService;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,12 +54,44 @@ public class ApiUserController {
         u.setUsername(params.get("username"));
         String password = params.get("password");
         u.setPassword(this.passwordEncoder.encode(password));
-        u.setRole("giangvien"); //tao giang vien
+        //u.setRole("giangvien"); //tao giang vien
+        u.setRole(params.get("role")); // tao sinh vien/ giang vien
         u.setActive(true);
         if (file.length > 0) {
             u.setFile(file[0]);
 
         }
         this.userService.addUser(u);
+    }
+
+    //delete ch?y ôn
+    @DeleteMapping("/users/{userId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(Model model, @PathVariable(value = "userId") long id) {
+        this.userService.deleteUser(id);
+    }
+
+//    @GetMapping("/users/")
+//    @CrossOrigin
+//    public ResponseEntity<List<Nguoidung>> list(@RequestParam Map<String, String> params) {
+//        return new ResponseEntity<>(this.userService.getUser(params), HttpStatus.OK);
+//    }
+//    
+//    @GetMapping(path = "/users/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
+//    public ResponseEntity<Nguoidung> retrieve(@PathVariable(value = "userId") long id){
+//        return new ResponseEntity<>(this.userService.getUserById(id), HttpStatus.OK);
+//    }
+    @GetMapping("/users/")
+    @CrossOrigin
+    public ResponseEntity<List<NguoidungDTO>> list(@RequestParam Map<String, String> params) {
+        List<Nguoidung> users = this.userService.getUser(params);
+        List<NguoidungDTO> userDTOs = this.userService.convertToDTOList(users);
+        return new ResponseEntity<>(userDTOs, HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/users/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<NguoidungDTO> retrieve(@PathVariable(value = "userId") long id) {
+        NguoidungDTO userDTO = this.userService.findNguoidungDTOById(id);
+        return new ResponseEntity<>(userDTO, HttpStatus.OK);
     }
 }

@@ -4,6 +4,7 @@
  */
 package com.nck.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.Basic;
@@ -48,17 +49,23 @@ public class ScoreSv implements Serializable {
     @Column(name = "cuoi_ky")
     private Double cuoiKy;
     @OneToMany(mappedBy = "scoreSv")
+    @JsonIgnore
+
     private Set<CotDiemThem> cotDiemThemSet;
     @JoinColumns({
         //@JoinColumn(name = "lop_hoc_id", referencedColumnName = "id"),
         @JoinColumn(name = "lop_hoc_id", referencedColumnName = "id")})
     @ManyToOne
+    @JsonIgnore
+
     private Lophoc lophoc;
     @JoinColumns({
         //@JoinColumn(name = "sinh_vien_id", referencedColumnName = "id"),
         //@JoinColumn(name = "sinh_vien_id", referencedColumnName = "id"),
         @JoinColumn(name = "sinh_vien_id", referencedColumnName = "id")})
     @ManyToOne
+    @JsonIgnore
+
     private Nguoidung nguoidung;
 
     public ScoreSv() {
@@ -141,5 +148,5 @@ public class ScoreSv implements Serializable {
     public String toString() {
         return "com.nck.pojo.ScoreSv[ id=" + id + " ]";
     }
-    
+
 }

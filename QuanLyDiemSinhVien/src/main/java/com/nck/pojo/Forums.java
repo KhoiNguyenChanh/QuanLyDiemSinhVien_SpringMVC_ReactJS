@@ -4,6 +4,7 @@
  */
 package com.nck.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.Basic;
@@ -41,13 +42,17 @@ public class Forums implements Serializable {
     @Column(name = "id")
     private Long id;
     @ManyToMany(mappedBy = "forumsSet")
+    @JsonIgnore
+
     private Set<Nguoidung> nguoidungSet;
     @JoinColumns({
-//        @JoinColumn(name = "lop_hoc_id", referencedColumnName = "id"),
-//        @JoinColumn(name = "lop_hoc_id", referencedColumnName = "id"),
-//        @JoinColumn(name = "lop_hoc_id", referencedColumnName = "id"),
+        //        @JoinColumn(name = "lop_hoc_id", referencedColumnName = "id"),
+        //        @JoinColumn(name = "lop_hoc_id", referencedColumnName = "id"),
+        //        @JoinColumn(name = "lop_hoc_id", referencedColumnName = "id"),
         @JoinColumn(name = "lop_hoc_id", referencedColumnName = "id")})
     @ManyToOne
+    @JsonIgnore
+
     private Lophoc lophoc;
 
     public Forums() {
@@ -106,5 +111,5 @@ public class Forums implements Serializable {
     public String toString() {
         return "com.nck.pojo.Forums[ id=" + id + " ]";
     }
-    
+
 }

@@ -6,9 +6,11 @@ package com.nck.services.impl;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
+import com.nck.dto.NguoidungDTO;
 import com.nck.pojo.Nguoidung;
 import com.nck.repositories.NguoidungRepository;
 import com.nck.services.NguoidungService;
+import com.nck.utils.NguoidungMapper;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
@@ -16,6 +18,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -81,4 +84,45 @@ public class NguoidungServiceImpl implements NguoidungService {
         this.nguoidungRepository.deleteUser(id);
 
     }
+
+    @Override
+    public List<Nguoidung> getUser(Map<String, String> params) {
+        return this.nguoidungRepository.getUser(params);
+    }
+
+    @Override
+    public Nguoidung getUserById(long id) {
+        return this.nguoidungRepository.getUserById(id);
+    }
+
+    @Override
+    // Thêm phương thức chuyển đổi
+    public NguoidungDTO convertToDTO(Nguoidung nguoidung) {
+        NguoidungDTO dto = new NguoidungDTO();
+        dto.setId(nguoidung.getId());
+        dto.setTen(nguoidung.getTen());
+        dto.setEmail(nguoidung.getEmail());
+        dto.setSdt(nguoidung.getSdt());
+        dto.setUsername(nguoidung.getUsername());
+        dto.setPassword(nguoidung.getPassword());
+        dto.setActive(true);
+        dto.setRole(nguoidung.getRole());
+        dto.setAvatar(nguoidung.getAvatar());
+        return dto;
+    }
+
+    @Override
+    public List<NguoidungDTO> convertToDTOList(List<Nguoidung> nguoidungList) {
+        return nguoidungList.stream()
+                .map(this::convertToDTO) // Method reference to instance method
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    // Thêm phương thức khác nếu cần
+    public NguoidungDTO findNguoidungDTOById(Long id) {
+        Nguoidung nguoidung = getUserById(id);
+        return convertToDTO(nguoidung);
+    }
+
 }

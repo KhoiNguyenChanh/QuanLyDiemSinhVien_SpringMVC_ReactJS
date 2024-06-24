@@ -4,6 +4,7 @@
  */
 package com.nck.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -38,9 +39,13 @@ public class Dangkymonhoc implements Serializable {
     private Long id;
     @JoinColumn(name = "lop_hoc_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
+    @JsonIgnore
+
     private Lophoc lopHocId;
     @JoinColumn(name = "sinh_vien_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
+    @JsonIgnore
+
     private Nguoidung sinhVienId;
 
     public Dangkymonhoc() {
@@ -98,5 +103,5 @@ public class Dangkymonhoc implements Serializable {
     public String toString() {
         return "com.nck.pojo.Dangkymonhoc[ id=" + id + " ]";
     }
-    
+
 }

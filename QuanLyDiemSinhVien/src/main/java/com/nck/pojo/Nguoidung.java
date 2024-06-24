@@ -49,16 +49,6 @@ import org.springframework.web.multipart.MultipartFile;
     @NamedQuery(name = "Nguoidung.findByAvatar", query = "SELECT n FROM Nguoidung n WHERE n.avatar = :avatar")})
 public class Nguoidung implements Serializable {
 
-    @JoinTable(name = "dangkymonhoc", joinColumns = {
-        //        @JoinColumn(name = "sinh_vien_id", referencedColumnName = "id"),
-        //        @JoinColumn(name = "sinh_vien_id", referencedColumnName = "id"),
-        @JoinColumn(name = "sinh_vien_id", referencedColumnName = "id")}, inverseJoinColumns = {
-        //        @JoinColumn(name = "lop_hoc_id", referencedColumnName = "id"),
-        //        @JoinColumn(name = "lop_hoc_id", referencedColumnName = "id"),
-        @JoinColumn(name = "lop_hoc_id", referencedColumnName = "id")})
-    @ManyToMany
-    private Set<Lophoc> lophocSet;
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -107,20 +97,22 @@ public class Nguoidung implements Serializable {
         @JoinColumn(name = "forum_id", referencedColumnName = "id")})
     @ManyToMany
     @JsonIgnore
-
     private Set<Forums> forumsSet;
     @OneToMany(mappedBy = "nguoidung")
     @JsonIgnore
-
     private Set<Monhoc> monhocSet;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "sinhVienId")
     @JsonIgnore
-
     private Set<Dangkymonhoc> dangkymonhocSet;
     @OneToMany(mappedBy = "nguoidung")
     @JsonIgnore
     private Set<ScoreSv> scoreSvSet;
-
+    @JoinTable(name = "dangkymonhoc", joinColumns = {
+        @JoinColumn(name = "sinh_vien_id", referencedColumnName = "id")}, inverseJoinColumns = {
+        @JoinColumn(name = "lop_hoc_id", referencedColumnName = "id")})
+    @ManyToMany
+    @JsonIgnore
+    private Set<Lophoc> lophocSet;
     @Transient
     private MultipartFile file;
 
