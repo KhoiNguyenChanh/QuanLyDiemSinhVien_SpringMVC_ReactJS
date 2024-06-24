@@ -13,6 +13,15 @@ import java.util.List;
  */
 //public interface NguoidungRepository extends JpaRepository<Nguoidung, Long> {
 public interface NguoidungRepository {
+
     List<Nguoidung> findByRole(String role);
+
+    Nguoidung getUserByUsername(String username);
+    Nguoidung getUserById(long id);
+    void addUser(Nguoidung user);
+
+    void deleteUser(long id);
+
     List<Nguoidung> getUser();
+
 }

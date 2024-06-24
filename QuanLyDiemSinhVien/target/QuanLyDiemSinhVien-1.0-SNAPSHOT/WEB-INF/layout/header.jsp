@@ -26,6 +26,21 @@
                         <a class="nav-link" href="${myUrl}">${d.tenDanhMuc}</a>
                     </li>
                 </c:forEach>
+                <c:choose>
+                    <c:when test="${pageContext.request.userPrincipal.name == null}">
+                        <li class="nav-item">
+                            <a class="btn btn-info" href="<c:url value="/login" />">Đăng nhập</a>
+                        </li>
+                    </c:when>
+                    <c:when test="${pageContext.request.userPrincipal.name != null}">
+                        <li class="nav-item">
+                                <a class="nav-link text-danger" href="<c:url value="/" />">Chào! ${pageContext.request.userPrincipal.name}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn btn-info" href="<c:url value="/logout" />">Đăng xuất</a>
+                        </li>
+                    </c:when>
+                </c:choose>
 
             </ul>
             <form action="<c:url value="/" />" method="GET" class="d-flex">

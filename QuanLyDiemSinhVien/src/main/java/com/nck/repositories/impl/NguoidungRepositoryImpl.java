@@ -42,4 +42,30 @@ public class NguoidungRepositoryImpl implements NguoidungRepository {
         return q.getResultList();     
     }
 
+    @Override
+    public Nguoidung getUserByUsername(String username) {
+        Session s = this.factory.getObject().getCurrentSession();
+        Query q = s.createNamedQuery("Nguoidung.findByUsername");
+        q.setParameter("username", username);
+        return (Nguoidung) q.getSingleResult();   
+    }
+
+    @Override
+    public void addUser(Nguoidung user) {
+        Session s = this.factory.getObject().getCurrentSession();
+        s.save(user);
+    }
+
+    @Override
+    public void deleteUser(long id) {
+        Session s = this.factory.getObject().getCurrentSession();
+        Nguoidung u = this.getUserById(id);
+        s.delete(u);
+    }
+
+    @Override
+    public Nguoidung getUserById(long id) {
+        Session s = this.factory.getObject().getCurrentSession();
+        return s.get(Nguoidung.class, id);    }
+
 }

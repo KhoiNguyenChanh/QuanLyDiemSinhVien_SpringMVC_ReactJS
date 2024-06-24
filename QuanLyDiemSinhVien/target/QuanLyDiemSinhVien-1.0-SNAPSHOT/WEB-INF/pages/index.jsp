@@ -30,7 +30,7 @@
                 <td class="text-secondary">${m.moTaMonHoc}</td>
                 <td class="text-secondary">${m.nguoidung.ten}</td>
                 <td class="text-center">
-                    <c:url value="/monhocs/${m.id}" var="url"/>
+                    <c:url value="/api/monhocs/${m.id}" var="url"/>
                     <a href="#" class="btn btn-primary mr-5">Xem chi tiết</a>
                     <a href="<c:url value="/monhocs/${m.id}"/>" class="btn btn-success">Cập nhật môn</a>
                     <button onclick="deleteMonhoc('${url}',${m.id})" class="btn btn-danger">Xóa môn</button>

@@ -4,6 +4,7 @@
  */
 package com.nck.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.Basic;
@@ -20,10 +21,13 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -46,11 +50,11 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Nguoidung implements Serializable {
 
     @JoinTable(name = "dangkymonhoc", joinColumns = {
-//        @JoinColumn(name = "sinh_vien_id", referencedColumnName = "id"),
-//        @JoinColumn(name = "sinh_vien_id", referencedColumnName = "id"),
+        //        @JoinColumn(name = "sinh_vien_id", referencedColumnName = "id"),
+        //        @JoinColumn(name = "sinh_vien_id", referencedColumnName = "id"),
         @JoinColumn(name = "sinh_vien_id", referencedColumnName = "id")}, inverseJoinColumns = {
-//        @JoinColumn(name = "lop_hoc_id", referencedColumnName = "id"),
-//        @JoinColumn(name = "lop_hoc_id", referencedColumnName = "id"),
+        //        @JoinColumn(name = "lop_hoc_id", referencedColumnName = "id"),
+        //        @JoinColumn(name = "lop_hoc_id", referencedColumnName = "id"),
         @JoinColumn(name = "lop_hoc_id", referencedColumnName = "id")})
     @ManyToMany
     private Set<Lophoc> lophocSet;
@@ -66,17 +70,16 @@ public class Nguoidung implements Serializable {
     @Size(min = 1, max = 255)
     @Column(name = "ten")
     private String ten;
-    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
+//    @Pattern(regexp = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message = "Invalid email")//if the field contains email address consider using this annotation to enforce field validation
     @Basic(optional = false)
-    @NotNull
     @Size(min = 1, max = 255)
     @Column(name = "email")
+    @NotNull
     private String email;
     @Size(max = 20)
     @Column(name = "sdt")
     private String sdt;
     @Basic(optional = false)
-    @NotNull
     @Size(min = 1, max = 255)
     @Column(name = "username")
     private String username;
@@ -85,6 +88,10 @@ public class Nguoidung implements Serializable {
     @Size(min = 1, max = 255)
     @Column(name = "password")
     private String password;
+
+    @Transient
+    private String confirmPassword;
+
     @Column(name = "active")
     private Boolean active;
     @Basic(optional = false)
@@ -96,22 +103,26 @@ public class Nguoidung implements Serializable {
     @Column(name = "avatar")
     private String avatar;
     @JoinTable(name = "tin_nhan_forum", joinColumns = {
-//        @JoinColumn(name = "tac_gia_id", referencedColumnName = "id"),
-//        @JoinColumn(name = "tac_gia_id", referencedColumnName = "id"),
-//        @JoinColumn(name = "tac_gia_id", referencedColumnName = "id"),
         @JoinColumn(name = "tac_gia_id", referencedColumnName = "id")}, inverseJoinColumns = {
-//        @JoinColumn(name = "forum_id", referencedColumnName = "id"),
-//        @JoinColumn(name = "forum_id", referencedColumnName = "id"),
-//        @JoinColumn(name = "forum_id", referencedColumnName = "id"),
         @JoinColumn(name = "forum_id", referencedColumnName = "id")})
     @ManyToMany
+    @JsonIgnore
+
     private Set<Forums> forumsSet;
     @OneToMany(mappedBy = "nguoidung")
+    @JsonIgnore
+
     private Set<Monhoc> monhocSet;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "sinhVienId")
+    @JsonIgnore
+
     private Set<Dangkymonhoc> dangkymonhocSet;
     @OneToMany(mappedBy = "nguoidung")
+    @JsonIgnore
     private Set<ScoreSv> scoreSvSet;
+
+    @Transient
+    private MultipartFile file;
 
     public Nguoidung() {
     }
@@ -270,5 +281,33 @@ public class Nguoidung implements Serializable {
     public void setLophocSet(Set<Lophoc> lophocSet) {
         this.lophocSet = lophocSet;
     }
-    
+
+    /**
+     * @return the confirmPassword
+     */
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    /**
+     * @param confirmPassword the confirmPassword to set
+     */
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
+    }
+
+    /**
+     * @return the file
+     */
+    public MultipartFile getFile() {
+        return file;
+    }
+
+    /**
+     * @param file the file to set
+     */
+    public void setFile(MultipartFile file) {
+        this.file = file;
+    }
+
 }
