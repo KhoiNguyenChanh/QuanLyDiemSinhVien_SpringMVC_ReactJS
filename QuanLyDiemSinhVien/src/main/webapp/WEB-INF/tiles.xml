@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache
+Software Foundation//DTD Tiles Configuration 3.0//EN"
+"http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+    <definition name="baseLayout"
+                template="/WEB-INF/layout/base.jsp"> 
+        <put-attribute name="title" value="" />
+        <put-attribute name="header"
+                       value="/WEB-INF/layout/header.jsp" />
+        <put-attribute name="content" value="" />
+        <put-attribute name="footer"
+                       value="/WEB-INF/layout/footer.jsp" />
+    </definition>
+    
+    <definition name="index" extends="baseLayout">
+        <put-attribute name="title" value="Trang chủ" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/index.jsp" />
+    </definition>
+    
+     <definition name="monhocs" extends="baseLayout">
+        <put-attribute name="title" value="Môn học" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/monhocs.jsp" />
+    </definition>
+    <definition name="noaccess" extends="baseLayout">
+        <put-attribute name="title" value="No access" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/noAccess.jsp" />
+    </definition>
+    <!--name là tên trong controller (cai /monhocsdetails") -->
+     <definition name="monhocdetails" extends="baseLayout">
+        <put-attribute name="title" value="Chi tiết môn học" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/monhocsDetails.jsp" />
+    </definition>
+     <definition name="users" extends="baseLayout">
+        <put-attribute name="title" value="Quản lý người dùng" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/users.jsp" />
+    </definition>
+    <definition name="sinhvienDetails" extends="baseLayout">
+        <put-attribute name="title" value="Chi tiết sinh viên" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/sinhvienDetails.jsp" />
+    </definition>
+</tiles-definitions>

@@ -42,4 +42,19 @@ public class MonhocServiceImpl implements MonhocService {
 //        return this.monhocRepo.getMonhoc();
 //    }
 
+    @Override
+    public Monhoc getMonhocById(long id) {
+        return this.monhocRepo.getMonhocById(id);
+    }
+
+    @Override
+    public void deleteMonhoc(long id) {
+        this.monhocRepo.deleteMonhoc(id);
+    }
+
+//    @Override
+//    public List<Monhoc> findGiangVien() {
+//        return this.monhocRepo.findGiangVien();
+//    }
+
 }

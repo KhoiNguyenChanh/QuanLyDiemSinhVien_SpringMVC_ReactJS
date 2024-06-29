@@ -4,6 +4,7 @@
  */
 package com.nck.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -53,6 +54,8 @@ public class CotDiemThem implements Serializable {
         //@JoinColumn(name = "cotdiem_id", referencedColumnName = "id"),
         @JoinColumn(name = "cotdiem_id", referencedColumnName = "id")})
     @ManyToOne
+    @JsonIgnore
+
     private ScoreSv scoreSv;
 
     public CotDiemThem() {
@@ -123,5 +126,5 @@ public class CotDiemThem implements Serializable {
     public String toString() {
         return "com.nck.pojo.CotDiemThem[ id=" + id + " ]";
     }
-    
+
 }

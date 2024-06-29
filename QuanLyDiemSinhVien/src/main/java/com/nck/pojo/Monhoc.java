@@ -4,6 +4,7 @@
  */
 package com.nck.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.Basic;
@@ -46,8 +47,8 @@ public class Monhoc implements Serializable {
     @Column(name = "id")
     private Long id;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 255)
+    @NotNull(message = "{monhoc.ten.nullErr}")
+    @Size(min = 1, max = 255, message = "{monhoc.ten.minMaxErr}")
     @Column(name = "ten")
     private String ten;
     @Lob
@@ -58,19 +59,19 @@ public class Monhoc implements Serializable {
     @Column(name = "ten_giang_vien")
     private String tenGiangVien;
     @JoinColumns({
-//        @JoinColumn(name = "danh_muc_id", referencedColumnName = "id"),
-//        @JoinColumn(name = "danh_muc_id", referencedColumnName = "id"),
         @JoinColumn(name = "danh_muc_id", referencedColumnName = "id")})
     @ManyToOne
+    @JsonIgnore
+
     private DanhMucMonHoc danhMucMonHoc;
     @JoinColumns({
-//        @JoinColumn(name = "giang_vien_id", referencedColumnName = "id"),
-//        @JoinColumn(name = "giang_vien_id", referencedColumnName = "id"),
-//        @JoinColumn(name = "giang_vien_id", referencedColumnName = "id"),
         @JoinColumn(name = "giang_vien_id", referencedColumnName = "id")})
     @ManyToOne
+    @JsonIgnore
+
     private Nguoidung nguoidung;
     @OneToMany(mappedBy = "monhoc")
+    @JsonIgnore
     private Set<Lophoc> lophocSet;
 
     public Monhoc() {
@@ -166,5 +167,5 @@ public class Monhoc implements Serializable {
     public String toString() {
         return "com.nck.pojo.Monhoc[ id=" + id + " ]";
     }
-    
+
 }
